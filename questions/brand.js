@@ -34,7 +34,7 @@ module.exports.brandQuestions = [
   {
     type: "text",
     name: "campaignId",
-    message: "Finally, please paste the BR campaign ID. ex e044e174-a737-11ea-bf11-42010af0048b",
+    message: "Finally, please paste the BR MOSAIC CAMPAIGN ID. ex e044e174-a737-11ea-bf11-42010af0048b",
     validate: validateUUID
   },
 
