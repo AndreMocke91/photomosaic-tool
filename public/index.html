@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>andre-avfc</title>
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//cdnjs.cloudflare.com/ajax/libs/ol3/3.10.1/ol.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://bluerobot-cdn.bluerobot.com/static/photomosaic/production/styles.min.css"
+    />
+
+    <style>
+      .top-right-title {
+        color: #000000; /* Colour of the words on the top right */
+      }
+
+      .top-bar {
+        background-color: #fff; /* Background Colour of the Top Bar */
+      }
+
+      .bottom-bar {
+        background-color: #000000; /* Background of the bottom right */
+        color: #ffffff; /* Colour of the words on the bottom bar */
+      }
+
+      /* UNCOMMENT THIS LINE TO REMOVE THE BR BRANDING ON THE BOTTOM RIGHT
+      .ol-attribution {
+        display: none;
+      } */
+    </style>
+
+    <script
+      type="text/javascript"
+      src="//code.jquery.com/jquery-2.1.1.min.js"
+    ></script>
+
+    <script>
+      // ALWAYS CONFIGURE
+      var CAMPAIGN_ID = "e044e174-a737-11ea-bf11-42010af0048b";
+      var LAYERS = 8;
+
+      // CUSTOM VIEW OPTIONS
+      var INITIAL_ZOOM_LEVEL = 2;
+      var ZOOM_ANIMATION_DURATION = 250;
+      var ZOOM_FRACTION = 1;
+      var INITIAL_VERTICAL_POSITION = 200;
+      var INITIAL_HORIZONTAL_POSITION = 0;
+      if ($(window).width() <= 667) {
+        INITIAL_ZOOM_LEVEL = 1;
+        INITIAL_VERTICAL_POSITION = 300;
+        INITIAL_HORIZONTAL_POSITION = -10;
+      }
+
+      // UNCOMMENT BELOW TO ADJUST THE TITLE & BODY OF THE "HANDLE NOT FOUND ALERT"
+      // var ALERT_IMAGE_NOT_FOUND_TITLE = "Custom Title";
+      // var ALERT_IMAGE_NOT_FOUND_BODY = "Custom Body";
+    </script>
+
+    <script
+      type="text/javascript"
+      src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="//cdnjs.cloudflare.com/ajax/libs/ol3/3.10.1/ol.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="//cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"
+    ></script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-static-top top-bar" style="margin-bottom: 0;">
+      <div class="container-fluid">
+        <div class="col-md-12">
+          <div class="col-xs-6">
+            <a class="navbar-brand" href="https://bluerobot.com">
+              <img
+                src="https://postimg.cc/c6dMGV5Q"
+              />
+            </a>
+          </div>
+          <div class="col-xs-6">
+            <ul class="nav navbar-nav navbar-right hidden-sm hidden-xs">
+              <li class="nav-title top-right-title">
+                andre-avfc
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div
+          class="col-sm-4 col-sm-offset-4 text-center search-bar"
+          style="margin-top: 40px;"
+        >
+          <div class="input-group">
+            <input
+              id="tagInput"
+              class="form-control"
+              type="text"
+              placeholder="@YourHandle"
+            />
+            <span class="input-group-btn">
+              <button id="searchButton" class="btn btn-info" type="button">
+                Find Me!
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div
+          class="col-sm-4 col-sm-offset-4 text-center bottom-bar"
+          style="margin-top: 40px;"
+        >
+          To remove your image, Tweet @andre-avfc using #whatever to remove your
+          image.
+        </div>
+      </div>
+
+      <div class="row"><div id="map" class="map col-sm-12"></div></div>
+    </div>
+
+    <div id="mediaModal" class="modal fade" tabindex="-1" role="dialog">
+      <div
+        class="modal-dialog modal-overwrite"
+        id="modal"
+        data-dismiss="modal"
+      ></div>
+    </div>
+
+    <script>
+      if (Element.prototype.createShadowRoot)
+        delete Element.prototype.createShadowRoot;
+    </script>
+
+    <!-- Adds window.twtter -->
+    <script src="https://platform.twitter.com/widgets.js"></script>
+
+    <!-- block the ui while loading -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js"></script>
+
+    <script
+      type="text/javascript"
+      src="https://bluerobot-cdn.bluerobot.com/static/photomosaic/production/scripts.min.js"
+    ></script>
+
+    <script>
+      (function(i, s, o, g, r, a, m) {
+        i["GoogleAnalyticsObject"] = r;
+        (i[r] =
+          i[r] ||
+          function() {
+            (i[r].q = i[r].q || []).push(arguments);
+          }),
+          (i[r].l = 1 * new Date());
+        (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m);
+      })(
+        window,
+        document,
+        "script",
+        "//www.google-analytics.com/analytics.js",
+        "ga"
+      );
+
+      ga("create", "UA-66052607-2", "auto");
+      ga("send", "pageview");
+    </script>
+  </body>
+</html>
