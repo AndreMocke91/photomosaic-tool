@@ -15,9 +15,21 @@ module.exports.brandQuestions = [
   },
   {
     type: "text",
-    name: "logoLink",
+    name: "logoURL",
     message: "Provide a link to the client's postimage logo, ex https://postimg.cc/c6dMGV5Q",
     validate: validateURL
+  },
+  {
+    type: "text",
+    name: "mainImageURL",
+    message: "Provide a link to main image, for Twitter purposes, ex https://i.postimg.cc/mkpn1j2d/3370-Jungle-World-Heart-Day-reveal-post-800x418px-REV-4.jpg",
+    validate: validateURL
+  },
+  {
+    type: "text",
+    name: "brandColor",
+    message: "Provide the brand's color code, ex #47AF5B",
+    validate: validateStringLength(4)
   },
   {
     type: "text",
