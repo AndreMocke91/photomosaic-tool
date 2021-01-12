@@ -1,7 +1,10 @@
 const { createProject } = require("./firebase/create-project");
+const { deployProject } = require("./firebase/deploy-project");
 const { brandQuestions } = require("./questions/brand");
 const { saveCampaignJSON, compilePublicFiles } = require("./shared/files");
-const { spawnCommand } = require("./shared/utils");
+require("dotenv-safe").config({});
+
+// const brand = require("./campaigns/andre-test-adding-fb.json")
 
 const onCancel = () => process.exit(0);
 
@@ -19,13 +22,17 @@ const startCLI = async ({ prompts = require("prompts") } = {}) => {
     return;
   }
 
-  const result = await spawnCommand("npx", ["firebase", "deploy", "--project", brand.projectId]);
+  const deployWorked = await deployProject(brand.projectId);
 
-  console.log(result)
-  console.log('All done, yay')
+  if (deployWorked) console.log(`Check out your brand, spanky new site at: https://${brand.projectId}.web.app/`)
+  // console.log("All done, yay");
 };
 
 (async () => {
-  await startCLI();
-  // const result = await createProject('andre-mosaic-tool-test-work')
+  try {
+    await startCLI();
+    // await deployProject(brand.projectId);
+  } catch (err) {
+    console.error(err);
+  }
 })();

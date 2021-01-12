@@ -1,22 +1,22 @@
-const { spawnCommand } = require("../shared/utils");
+const { requireAuth } = require("firebase-tools/lib/requireAuth");
+const { createCloudProject, addFirebaseToCloudProject } = require("firebase-tools/lib/management/projects");
+
+const isProjectExistsError = e => e?.original?.status === 409
 
 const createProject = async (projectId) => {
   console.log("Creating firebase project");
 
-  const result = await spawnCommand("npx", ["firebase", "projects:create", projectId]);
-
-  if (result.indexOf("Failed to create project because there is already a project with ID") > -1) {
-    console.log("Project already exists");
-    return true;
+  try {
+    requireAuth({})
+    await createCloudProject(projectId, {});
+    await addFirebaseToCloudProject(projectId)
+    console.log('Creation complete for :', projectId )
+    return true
+  } catch (err) {
+    if(isProjectExistsError(err)) return true
+    console.error(err);
+    return false
   }
-  if (result.indexOf("https://console.firebase.google.com/project/") > -1) {
-    console.log("Project created:", projectId);
-    return true;
-  }
-
-  console.log(result);
-
-  return false;
 };
 
 module.exports = {
