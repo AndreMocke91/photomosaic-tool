@@ -14,12 +14,13 @@ const config = {
         },
       ],
     };
-  },
-  path: () => '/Users/andremocke/Documents/Github/Bluerobot/photomosaic-tool/public'
+  }
 };
 
-const deployProject = async (projectId) => {
+const deployProject = async (projectId, pathToFolder = '/Users/andremocke/Documents/Github/Bluerobot/photomosaic-tool/public') => {
   console.log("Deploying firebase project");
+
+  config.path = () => pathToFolder
 
   try {
     requireAuth({});
